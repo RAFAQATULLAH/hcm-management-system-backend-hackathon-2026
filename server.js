@@ -13,23 +13,29 @@ const app = express();
 
 
 const allowedOrigins = [
-  "https://hcm-staff-management-system-hackath.vercel.app",
+ "https://hcm-staff-management-system-hackath.vercel.app",
   "https://hcm-admin-management-system-hackath.vercel.app",
-];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+  process.env.ADMIN_FRONTEND_URL,
+  process.env.STAFF_FRONTEND_URL,
+].filter(Boolean);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests without an Origin header, such as server-to-server calls
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    console.error("CORS blocked this origin:", origin);
+    return callback(new Error("Origin not allowed by CORS"));
+  },
+
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 
 
 app.use(express.json());
