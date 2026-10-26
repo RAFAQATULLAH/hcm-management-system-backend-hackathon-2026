@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const employeeRoutes = require("./Routes/employeeRoutes");
 const settingsRoutes = require("./Routes/settingsRoutes");
+const staffAuthRoutes=require('./Routes/staffAuthRoutes');
+const staffFeatureRoutes=require('./Routes/staffFeatureRoutes');
+
 
 const app = express();
 
@@ -40,6 +43,8 @@ app.use("/api/admin", require("./Routes/adminDashboardRoutes"));
 app.use("/api/admin/hr", require("./Routes/hrRoutes"));
 app.use("/api/admin/employees", employeeRoutes);
 app.use("/api/admin/settings", settingsRoutes);
+app.use("/api/staff", staffAuthRoutes);
+app.use("/api/staff", staffFeatureRoutes);
 
 
 
@@ -60,7 +65,7 @@ const startServer = async () => {
     const PORT = process.env.PORT || 4000;
 
     app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`);
+      console.log(`Server running at https://hcm-management-system-backend-hacka.vercel.app/`);
     });
   } catch (error) {
     console.error("Server startup failed:", error.message);
