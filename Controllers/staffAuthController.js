@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const StaffUser = require("../Models/StaffUser");
+const StaffUser = require("../models/StaffUser");
 
 exports.staffLogin = async (req, res) => {
   try {

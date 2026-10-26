@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
-const StaffUser = require("../Models/StaffUser");
-const Attendance = require("../Models/Attendance");
-const LeaveRequest = require("../Models/LeaveRequest");
+const StaffUser = require("../models/StaffUser");
+const Attendance = require("../models/Attendance");
+const LeaveRequest = require("../models/LeaveRequest");
 
 function dayBounds(input) {
   // The app is used in Pakistan; use the same calendar day as the staff date input,
