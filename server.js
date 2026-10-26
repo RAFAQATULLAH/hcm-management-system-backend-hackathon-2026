@@ -9,14 +9,27 @@ const settingsRoutes = require("./Routes/settingsRoutes");
 const app = express();
 
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://hcm-admin-management-system-hackath.vercel.app",
+  // Add your deployed Staff frontend URL here
+];
+
 app.use(
   cors({
-    origin: [
-      "https://hcm-admin-management-system-hackath.vercel.app",
-      "http://localhost:5174",
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 app.use(express.json());
 
