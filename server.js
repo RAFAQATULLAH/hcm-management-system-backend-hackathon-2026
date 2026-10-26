@@ -13,10 +13,8 @@ const app = express();
 
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
+  "https://hcm-staff-management-system-hackath.vercel.app",
   "https://hcm-admin-management-system-hackath.vercel.app",
-  // Add your deployed Staff frontend URL here
 ];
 
 app.use(
